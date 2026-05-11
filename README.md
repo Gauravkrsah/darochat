@@ -36,15 +36,22 @@ bash run_chat.sh
 *(Troubleshooting: If you ever move the `darochat` folder to a new location and get a "pip cannot execute" error, simply delete the `venv` folder by running `rm -rf venv`, and then run `bash run_chat.sh` again to rebuild it).*
 
 #### Option B: Running Manually (Web Server or Terminal)
-If you prefer to start the Web Server (or if you want to run the scripts manually), you must **activate the virtual environment** first.
+If you prefer to start the Web Server (or if you want to run the scripts manually), you must **create a virtual environment** and install the dependencies first.
 
-**Step 1: Activate the Virtual Environment**
-Run this command from the project root:
+**Step 1: Create and Activate the Virtual Environment**
+Run these commands from the project root:
 ```bash
+python3 -m venv venv
 source venv/bin/activate
 ```
 
-**Step 2: Start the Web UI**
+**Step 2: Install Dependencies**
+Install the required packages from the included `requirements.txt`:
+```bash
+pip install -r requirements.txt
+```
+
+**Step 3: Start the Web UI**
 ```bash
 python web/server.py
 ```
