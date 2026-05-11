@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Quick test – verify NVIDIA NIM API key + a few models."""
 
+import os
 from openai import OpenAI
 
 # Load .env file

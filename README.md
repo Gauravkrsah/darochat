@@ -20,27 +20,42 @@ A sleek, premium web-based AI chatbot UI powered by the NVIDIA NIM API. It allow
 Create a `.env` file in the root directory (where this README is located) and add your API keys:
 ```env
 NVIDIA_API_KEY=your_nvidia_nim_api_key_here
+ZHIPUAI_API_KEY=your_zhipuai_api_key_here
 ```
-*(Note: Never commit your `.env` file to version control. It is already ignored in the `.gitignore`)*
+*(Note: Never commit your `.env` file to version control. It is automatically ignored by `.gitignore`)*
 
-### 3. Run the Chatbot
-You can run the web application easily using the provided shell script:
+### 3. How to Run the App
+You can run Daro Chat either as a **Web Application** (recommended) or entirely in the **Terminal**.
 
+#### Option A: The Easy Way (All-in-One Script)
+The simplest way to run the Terminal Chatbot is using the provided bash script. This automatically creates the Python virtual environment (`venv`) and installs the required packages:
 ```bash
 bash run_chat.sh
 ```
 
-This will:
-1. Set up a Python virtual environment (`venv`) if it doesn't exist.
-2. Install necessary dependencies (like `openai`).
-3. Start the proxy server on port 8080.
+*(Troubleshooting: If you ever move the `darochat` folder to a new location and get a "pip cannot execute" error, simply delete the `venv` folder by running `rm -rf venv`, and then run `bash run_chat.sh` again to rebuild it).*
 
-### 4. Access the App
-Once the server is running, the terminal will display the local and network URLs:
-- **Local (On this machine)**: `http://localhost:8080`
-- **Network (Other devices)**: `http://192.168.x.x:8080` (Check terminal for exact IP)
+#### Option B: Running Manually (Web Server or Terminal)
+If you prefer to start the Web Server (or if you want to run the scripts manually), you must **activate the virtual environment** first.
 
-Open the URL in any modern browser to start chatting!
+**Step 1: Activate the Virtual Environment**
+Run this command from the project root:
+```bash
+source venv/bin/activate
+```
+
+**Step 2: Start the Web UI**
+```bash
+python web/server.py
+```
+This will start a local proxy server. You can access the UI by opening `http://localhost:8080` in your web browser. It will also print your local network IP (e.g., `http://192.168.x.x:8080`) so you can open the chatbot on your phone or other devices on the same Wi-Fi!
+
+**Step 2 (Alternative): Start the Terminal UI**
+```bash
+python nvidia_chat.py
+```
+
+*(Note: When you are finished, you can type `deactivate` in the terminal to exit the virtual environment).*
 
 ## Architecture
 - **Backend (`web/server.py`)**: A lightweight Python `http.server` that acts as a proxy. It intercepts requests from the frontend and securely forwards them to the NVIDIA NIM API, bypassing browser CORS restrictions and protecting your API key.
